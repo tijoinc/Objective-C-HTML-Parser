@@ -61,10 +61,10 @@ typedef enum
 -(NSString*)getAttributeNamed:(NSString*)name;
 
 //Find childer with the specified tag name
--(NSArray*)findChildTags:(NSString*)tagName;
+-(NSArray*)findChildrenWithTag:(NSString*)tagName;
 
 //Looks for a tag name e.g. "h3"
--(HTMLNode*)findChildTag:(NSString*)tagName;
+-(HTMLNode*)findChildWithTag:(NSString*)tagName;
 
 //Returns the first child element
 -(HTMLNode*)firstChild;

@@ -151,7 +151,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 }
 
 
--(NSArray*)findChildTags:(NSString*)tagName
+-(NSArray*)findChildrenWithTag:(NSString*)tagName
 {
 	NSMutableArray * array = [NSMutableArray array];
 	
@@ -182,7 +182,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 	return NULL;
 }
 
--(HTMLNode*)findChildTag:(NSString*)tagName
+-(HTMLNode*)findChildWithTag:(NSString*)tagName
 {
 	return [self findChildTag:tagName inXMLNode:_node->children];
 }
