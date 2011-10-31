@@ -153,6 +153,10 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 	}	
 }
 
+-(NSArray*)findChildTags:(NSString*)tagName
+{
+	return [self findChildrenWithTag:tagName];
+}
 
 -(NSArray*)findChildrenWithTag:(NSString*)tagName
 {
@@ -183,6 +187,11 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 	}	
 	
 	return NULL;
+}
+
+-(HTMLNode*)findChildTag:(NSString*)tagName
+{
+	return [self findChildWithTag:tagName];
 }
 
 -(HTMLNode*)findChildWithTag:(NSString*)tagName

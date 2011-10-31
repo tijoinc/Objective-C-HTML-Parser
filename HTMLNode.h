@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AvailabilityMacros.h>
 #import <libxml/HTMLparser.h>
 #import "HTMLParser.h"
 
@@ -61,9 +62,11 @@ typedef enum
 -(NSString*)getAttributeNamed:(NSString*)name;
 
 //Find childer with the specified tag name
+-(NSArray*)findChildTags:(NSString*)tagName DEPRECATED_ATTRIBUTE;
 -(NSArray*)findChildrenWithTag:(NSString*)tagName;
 
 //Looks for a tag name e.g. "h3"
+-(HTMLNode*)findChildTag:(NSString*)tagName DEPRECATED_ATTRIBUTE;
 -(HTMLNode*)findChildWithTag:(NSString*)tagName;
 
 //Returns the first child element
