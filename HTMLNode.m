@@ -300,7 +300,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 
 -(id)initWithXMLNode:(xmlNode*)xmlNode
 {
-	if (self = [super init])
+	if ((self = [super init]))
 	{
 		_node = xmlNode;
 	}
