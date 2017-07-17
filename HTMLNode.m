@@ -53,6 +53,11 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
             {
 				return [NSString stringWithCString:(void*)child->content encoding:NSUTF8StringEncoding];
 			}
+            else
+            {
+                // Needed for <html amp> to indicate the attribute is present even if empty.
+                return @"";
+            }
 			break;
 		}
 	}
