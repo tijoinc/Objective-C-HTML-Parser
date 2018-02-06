@@ -16,7 +16,7 @@
 	if (_doc == NULL)
 		return NULL;
 	
-	return [[[HTMLNode alloc] initWithXMLNode:(xmlNode*)_doc] autorelease];
+	return [[HTMLNode alloc] initWithXMLNode:(xmlNode*)_doc];
 }
 
 -(HTMLNode*)html
@@ -102,13 +102,10 @@
 
 	if (_data == nil || *error)
 	{
-		[_data release];
 		return nil;
 	}
 	
 	self = [self initWithData:_data error:error];
-	
-	[_data release];
 	
 	return self;
 }
@@ -120,8 +117,6 @@
 	{
 		xmlFreeDoc(_doc);
 	}
-	
-	[super dealloc];
 }
 
 @end
