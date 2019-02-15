@@ -17,7 +17,7 @@
 #define ParsingDepthSame -1
 #define ParsingDepth size_t
 
-typedef enum
+typedef NS_CLOSED_ENUM(NSInteger, HTMLNodeType)
 {
 	HTMLHrefNode,
 	HTMLTextNode,
@@ -32,7 +32,7 @@ typedef enum
 	HTMLStrongNode,
 	HTMLPreNode,
 	HTMLBlockQuoteNode,
-} HTMLNodeType;
+};
 
 @interface HTMLNode : NSObject 
 {
