@@ -23,52 +23,15 @@ __attribute__((objc_direct_members))
 	return [[HTMLNode alloc] initWithXMLNode:(xmlNode*)_doc];
 }
 
--(HTMLNode*)html
-{
-	if (_doc == NULL)
-		return NULL;
-	
-	return [[self doc] findChildWithTag:@"html"];
-}
-
 -(HTMLNode*)body
 {
-	if (_doc == NULL)
-		return NULL;
-	
-	return [[self doc] findChildWithTag:@"body"];
+    if (_doc == NULL)
+        return NULL;
+    
+    return [[self doc] findChildWithTag:@"body"];
 }
 
--(id)initWithString:(NSString*)string error:(NSError**)error
-{ 
-	if ((self = [super init]))
-	{
-		_doc = NULL;
-		
-		if ([string length] > 0)
-		{
-			CFStringEncoding cfenc = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
-			CFStringRef cfencstr = CFStringConvertEncodingToIANACharSetName(cfenc);
-			const char *enc = CFStringGetCStringPtr(cfencstr, 0);
-			// _doc = htmlParseDoc((xmlChar*)[string UTF8String], enc);
-			int optionsHtml = 0;
-			optionsHtml = HTML_PARSE_RECOVER;
-			optionsHtml = optionsHtml | HTML_PARSE_NOERROR; //Uncomment this to see HTML errors
-			optionsHtml = optionsHtml | HTML_PARSE_NOWARNING;
-			_doc = htmlReadDoc ((xmlChar*)[string UTF8String], NULL, enc, optionsHtml);
-		}
-		else 
-		{
-			if (error) {
-				*error = [NSError errorWithDomain:@"HTMLParserdomain" code:1 userInfo:nil];
-			}
-		}
-	}
-	
-	return self;
-}
-
--(id)initWithData:(NSData*)data error:(NSError**)error
+-(instancetype)initWithData:(NSData*)data error:(NSError**)error
 {
 	if ((self = [super init]))
 	{
@@ -98,22 +61,6 @@ __attribute__((objc_direct_members))
 	
 	return self;
 }
-
--(id)initWithContentsOfURL:(NSURL*)url error:(NSError**)error
-{
-	
-	NSData * _data = [[NSData alloc] initWithContentsOfURL:url options:0 error:error];
-
-	if (_data == nil || *error)
-	{
-		return nil;
-	}
-	
-	self = [self initWithData:_data error:error];
-	
-	return self;
-}
-
 
 -(void)dealloc
 {
