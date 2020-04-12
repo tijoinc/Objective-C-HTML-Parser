@@ -110,12 +110,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 				for(xmlNode * child = attr->children; NULL != child; child = child->next)
 				{
 					
-					BOOL match = NO;
-					if (!partial && strcmp((char*)child->content, classNameStr) == 0)
-						match = YES;
-					else if (partial && strstr ((char*)child->content, classNameStr) != NULL)
-						match = YES;
-
+                    const BOOL match = partial ? strstr((char*)child->content, classNameStr) != NULL : strcmp((char*)child->content, classNameStr) == 0;
 					if (match)
 					{
 						//Found node
@@ -247,13 +242,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 			{				
 				for(xmlNode * child = attr->children; NULL != child; child = child->next)
 				{
-					
-					BOOL match = NO;
-					if (!partial && strcmp((char*)child->content, classNameStr) == 0)
-						match = YES;
-					else if (partial && strstr ((char*)child->content, classNameStr) != NULL)
-						match = YES;
-					
+                    const BOOL match = partial ? strstr((char*)child->content, classNameStr) != NULL : strcmp((char*)child->content, classNameStr) == 0;
 					if (match)
 					{					
 						return [[HTMLNode alloc] initWithXMLNode:cur_node];
