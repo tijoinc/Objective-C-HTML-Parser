@@ -8,7 +8,9 @@
 
 #import "HTMLParser.h"
 
-
+#if defined(__IPHONE_14_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_0
+__attribute__((objc_direct_members))
+#endif
 @implementation HTMLParser
 
 -(HTMLNode*)doc
