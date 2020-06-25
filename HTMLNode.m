@@ -9,7 +9,7 @@
 #import "HTMLNode.h"
 #import <libxml/HTMLtree.h>
 
-#if defined(__IPHONE_14_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_0
+#if defined(__has_attribute) && __has_attribute(objc_direct_members)
 __attribute__((objc_direct_members))
 #endif
 @implementation HTMLNode
