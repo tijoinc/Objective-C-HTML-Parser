@@ -11,7 +11,9 @@
 #if defined(__has_attribute) && __has_attribute(objc_direct_members)
 __attribute__((objc_direct_members))
 #endif
-@implementation HTMLParser
+@implementation HTMLParser {
+    htmlDocPtr _doc;
+}
 
 -(HTMLNode*)doc
 {

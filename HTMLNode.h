@@ -34,11 +34,7 @@ typedef NS_CLOSED_ENUM(NSInteger, HTMLNodeType)
 	HTMLBlockQuoteNode,
 };
 
-@interface HTMLNode : NSObject 
-{
-@public
-	xmlNode * _node;
-}
+@interface HTMLNode : NSObject
 
 //Init with a lib xml node (shouldn't need to be called manually)
 //Use [parser doc] to get the root Node

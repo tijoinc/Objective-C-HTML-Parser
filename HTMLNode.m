@@ -12,7 +12,9 @@
 #if defined(__has_attribute) && __has_attribute(objc_direct_members)
 __attribute__((objc_direct_members))
 #endif
-@implementation HTMLNode
+@implementation HTMLNode  {
+    xmlNode * _node;
+}
 
 -(HTMLNode*)parent
 {

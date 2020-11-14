@@ -12,11 +12,7 @@
 
 @class HTMLNode;
 
-@interface HTMLParser : NSObject 
-{
-	@public
-	htmlDocPtr _doc;
-}
+@interface HTMLParser : NSObject
 
 -(id)initWithContentsOfURL:(NSURL*)url error:(NSError**)error;
 -(id)initWithData:(NSData*)data error:(NSError**)error;
