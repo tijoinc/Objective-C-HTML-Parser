@@ -63,9 +63,7 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
 -(void)findChildrenWithAttribute:(const char*)attribute matchingName:(const char*)className inXMLNode:(xmlNode *)node inArray:(NSMutableArray*)array allowPartial:(BOOL)partial
 {
 	xmlNode *cur_node = NULL;
-	const char * classNameStr = className;
-	//BOOL found = NO;
-	
+    
     for (cur_node = node; cur_node; cur_node = cur_node->next) 
 	{				
 		for(xmlAttrPtr attr = cur_node->properties; NULL != attr; attr = attr->next)
@@ -75,7 +73,7 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
 			{				
 				for(xmlNode * child = attr->children; NULL != child; child = child->next)
 				{
-                    const BOOL match = partial ? strstr((char*)child->content, classNameStr) != NULL : strcmp((char*)child->content, classNameStr) == 0;
+                    const BOOL match = partial ? strstr((char*)child->content, className) != NULL : strcmp((char*)child->content, className) == 0;
 					if (match)
 					{
 						//Found node
@@ -168,8 +166,6 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
 -(HTMLNode*)findChildWithAttribute:(const char*)attribute matchingName:(const char*)name inXMLNode:(xmlNode *)node allowPartial:(BOOL)partial
 {
 	xmlNode *cur_node = NULL;
-	const char * classNameStr = name;
-	//BOOL found = NO;
 
 	if (node == NULL)
 		return NULL;
@@ -182,7 +178,7 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
 			{				
 				for(xmlNode * child = attr->children; NULL != child; child = child->next)
 				{
-                    const BOOL match = partial ? strstr((char*)child->content, classNameStr) != NULL : strcmp((char*)child->content, classNameStr) == 0;
+                    const BOOL match = partial ? strstr((char*)child->content, name) != NULL : strcmp((char*)child->content, name) == 0;
 					if (match)
 					{					
 						return [[HTMLNode alloc] initWithXMLNode:cur_node];
