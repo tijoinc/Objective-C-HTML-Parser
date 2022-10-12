@@ -37,7 +37,6 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
                 // Needed for <html amp> to indicate the attribute is present even if empty.
                 return @"";
             }
-			break;
 		}
 	}
 	
