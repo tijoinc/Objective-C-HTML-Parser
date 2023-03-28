@@ -21,33 +21,28 @@ __attribute__((objc_direct_members))
     return [[HTMLNode alloc] initWithXMLNode:_node->parent];
 }
 
-static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
-{
-	for(xmlAttrPtr attr = node->properties; NULL != attr; attr = attr->next)
-	{
-		if (strcmp((char*)attr->name, nameStr) == 0)
-		{
+-(NSString*)getAttributeNamed:(NSString*)name
+{	
+	const char * nameStr = [name UTF8String];
+	
+    for(xmlAttrPtr attr = _node->properties; NULL != attr; attr = attr->next)
+    {
+        if (strcmp((char*)attr->name, nameStr) == 0)
+        {
             xmlNode * child = attr->children;
             if (child)
             {
-				return [NSString stringWithCString:(void*)child->content encoding:NSUTF8StringEncoding];
-			}
+                return [NSString stringWithCString:(void*)child->content encoding:NSUTF8StringEncoding];
+            }
             else
             {
                 // Needed for <html amp> to indicate the attribute is present even if empty.
                 return @"";
             }
-		}
-	}
-	
-	return NULL;
-}
-
--(NSString*)getAttributeNamed:(NSString*)name
-{	
-	const char * nameStr = [name UTF8String];
-	
-	return getAttributeNamed(_node, nameStr);
+        }
+    }
+    
+    return NULL;
 }
 
 //Returns the tag name
@@ -146,62 +141,6 @@ static NSString *getAttributeNamed(xmlNode * node, const char * nameStr)
 {
 	return [self findChildTag:tagName inXMLNode:_node->children];
 }
-
-/*
--(NSString*)description
-{
-	NSString * string = [NSString stringWithFormat:@"<%s>%@\n", _node->name, [self contents]];
-	
-	for (HTMLNode * child in [self children])
-	{
-		string = [string stringByAppendingString:[child description]];
-	}
-	
-	string = [string stringByAppendingString:[NSString stringWithFormat:@"<%s>\n", _node->name]];
-
-	return string;
-}*/
-
--(HTMLNode*)findChildWithAttribute:(const char*)attribute matchingName:(const char*)name inXMLNode:(xmlNode *)node allowPartial:(BOOL)partial
-{
-	xmlNode *cur_node = NULL;
-
-	if (node == NULL)
-		return NULL;
-	
-    for (cur_node = node; cur_node; cur_node = cur_node->next) 
-	{		
-		for(xmlAttrPtr attr = cur_node->properties; NULL != attr; attr = attr->next)
-		{			
-			if (strcmp((char*)attr->name, attribute) == 0)
-			{				
-				for(xmlNode * child = attr->children; NULL != child; child = child->next)
-				{
-                    const BOOL match = partial ? strstr((char*)child->content, name) != NULL : strcmp((char*)child->content, name) == 0;
-					if (match)
-					{					
-						return [[HTMLNode alloc] initWithXMLNode:cur_node];
-					}
-				}
-				break;
-			}
-		}
-		
-		HTMLNode * cNode = [self findChildWithAttribute:attribute matchingName:name inXMLNode:cur_node->children allowPartial:partial];
-		if (cNode != NULL)
-		{
-			return cNode;
-		}
-	}	
-		
-	return NULL;
-}
-
--(HTMLNode*)findChildWithAttribute:(NSString*)attribute matchingName:(NSString*)className allowPartial:(BOOL)partial
-{
-	return [self findChildWithAttribute:[attribute UTF8String] matchingName:[className UTF8String] inXMLNode:_node->children allowPartial:partial];
-}
-
 -(NSArray*)findChildrenWithAttribute:(NSString*)attribute matchingName:(NSString*)className allowPartial:(BOOL)partial
 {
 	NSMutableArray * array = [NSMutableArray array];

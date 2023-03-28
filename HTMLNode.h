@@ -23,11 +23,6 @@
 //Use [parser doc] to get the root Node
 -(id)initWithXMLNode:(xmlNode*)xmlNode;
 
-//Finds a single child with a matching attribute 
-//set allowPartial to match partial matches 
-//e.g. <img src="http://www.google.com> [findChildWithAttribute:@"src" matchingName:"google.com" allowPartial:TRUE]
--(HTMLNode*)findChildWithAttribute:(NSString*)attribute matchingName:(NSString*)className allowPartial:(BOOL)partial;
-
 //Finds all children with a matching attribute
 -(NSArray*)findChildrenWithAttribute:(NSString*)attribute matchingName:(NSString*)className allowPartial:(BOOL)partial;
 
