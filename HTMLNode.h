@@ -13,10 +13,6 @@
 
 @class HTMLParser;
 
-#define ParsingDepthUnlimited 0
-#define ParsingDepthSame -1
-#define ParsingDepth size_t
-
 @interface HTMLNode : NSObject
 
 //Init with a lib xml node (shouldn't need to be called manually)
